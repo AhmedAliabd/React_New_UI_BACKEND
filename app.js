@@ -7,6 +7,7 @@ app.get("/", (req, res) => {
     message: "Welcome!",
   });
 });
+console.log("WOW");
 
 app.listen(8000, () => {
   console.log("SERVER RUNNING");
