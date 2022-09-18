@@ -1,7 +1,6 @@
 const express = require("express");
+const { loginUser } = require("../controllers/userController");
 const router = express.Router();
 
-router.get("/login", (req, res) => {
-  res.status(200).json({ message: "HELLO FROM ROUTER" });
-});
+router.get("/login", loginUser);
 module.exports = router;
