@@ -1,7 +1,11 @@
 const express = require("express");
 const colors = require("colors");
 const dotenv = require("dotenv").config();
+const DB = require("./configs/db");
 const { errorHandler } = require("./middleware/errorHandler");
+
+//Connect DB
+DB();
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
