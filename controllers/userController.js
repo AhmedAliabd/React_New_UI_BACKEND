@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
+
 //@Desc Login user
 //@Route api/users/login
 //@Access public
@@ -12,10 +13,13 @@ const loginUser = asyncHandler(async (req, res) => {
   }
   const user = await User.findOne({ email });
   console.log(user);
-  if (user) {
+  //check user and password match
+  if (user && (await bcrypt.compare(password, user.password))) {
     res.status(200).json({ user: user });
+  } else {
+    res.status(401);
+    throw new Error("invalid credentials");
   }
-  //res.status(200).json({ message: "user controller" });
 });
 
 //@Desc register user
