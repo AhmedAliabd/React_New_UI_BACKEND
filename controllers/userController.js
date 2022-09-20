@@ -59,10 +59,23 @@ const register = asyncHandler(async (req, res) => {
   }
 });
 
+//@Desc Get account
+//@Route /account
+//@Access Private
+const getAccount = asyncHandler(async (req, res) => {
+  const userAccount = {
+    email: req.user.email,
+    name: req.user.name,
+    id: req.user._id,
+  };
+  res.send({ user: userAccount });
+});
+
 const generateToken = (id) => {
   return JWT.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 };
 module.exports = {
   loginUser,
   register,
+  getAccount,
 };
