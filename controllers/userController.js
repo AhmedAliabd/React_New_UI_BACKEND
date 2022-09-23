@@ -8,6 +8,7 @@ const JWT = require("jsonwebtoken");
 //@Access public
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
+  console.log(req.body);
   if (!email || !password) {
     res.status(400);
     throw new Error("please include all fields");

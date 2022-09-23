@@ -9,7 +9,7 @@ const protected = require("../middleware/authMiddleware");
 
 const router = express.Router();
 
-router.get("/login", loginUser);
+router.post("/login", loginUser);
 router.post("/", register);
 router.get("/account", protected, getAccount);
 
