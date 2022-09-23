@@ -13,14 +13,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const PORT = process.env.PORT || 8000;
-
+app.get("/", (req, res) => {
+  res.json({ message: "working" });
+});
 //Routes 🚆
 app.use("/api/users", require("./routes/userRoute"));
 if (process.env.NODE_ENV === "production") {
 }
-app.get("*", (req, res) => {
-  res.send({ message: "working" });
-});
+
 app.use(errorHandler);
 
 process.on("uncaughtException", (err) => {
