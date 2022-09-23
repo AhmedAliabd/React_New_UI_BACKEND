@@ -14,10 +14,16 @@ const loginUser = asyncHandler(async (req, res) => {
     throw new Error("please include all fields");
   }
   const user = await User.findOne({ email });
-  console.log(user);
+  const userInfo = delete user.password;
   //check user and password match
   if (user && (await bcrypt.compare(password, user.password))) {
-    res.status(200).json({ user: user, token: generateToken(user._id) });
+    delete user.password;
+    res.status(200).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      token: generateToken(user._id),
+    });
   } else {
     res.status(401);
     throw new Error("invalid credentials");
