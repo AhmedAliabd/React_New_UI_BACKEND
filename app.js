@@ -18,6 +18,9 @@ const PORT = process.env.PORT || 8000;
 app.use("/api/users", require("./routes/userRoute"));
 if (process.env.NODE_ENV === "production") {
 }
+app.get("*", (req, res) => {
+  res.send({ message: "working" });
+});
 app.use(errorHandler);
 
 process.on("uncaughtException", (err) => {
