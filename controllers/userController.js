@@ -8,16 +8,11 @@ const JWT = require("jsonwebtoken");
 //@Access public
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  console.log(req.body);
-  if (!email || !password) {
-    res.status(400);
-    throw new Error("please include all fields");
-  }
+
   const user = await User.findOne({ email });
-  const userInfo = delete user.password;
-  //check user and password match
+
+  // Check user and passwords match
   if (user && (await bcrypt.compare(password, user.password))) {
-    delete user.password;
     res.status(200).json({
       _id: user._id,
       name: user.name,
@@ -26,7 +21,7 @@ const loginUser = asyncHandler(async (req, res) => {
     });
   } else {
     res.status(401);
-    throw new Error("invalid credentials");
+    throw new Error("Invalid credentials");
   }
 });
 
